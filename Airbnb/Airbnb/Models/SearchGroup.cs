@@ -5,14 +5,13 @@ using System.Text;
 
 namespace Airbnb
 {
-    public class SearchGroup : List<Search>
+    public class SearchGroup : ObservableCollection<Search>
     {
-        private string Name { get; set; }
-        private ObservableCollection<Search> Searches { get; set; }
-       public SearchGroup(string searchGroupName, ObservableCollection<Search> searches)
+        public string Title { get; }
+       
+       public SearchGroup(string searchGroupName)
         {
-            Name = searchGroupName;
-            Searches = searches;
+            Title = searchGroupName;
         }
     }
 }

@@ -8,29 +8,31 @@ namespace Airbnb
 {
     class SearchService
     {
-        SearchGroup searchesGroups;
-        ObservableCollection<Search> searches; 
+        public SearchGroup searchesGroups { get; }
+        
         public SearchService()
         {
-            searches = new ObservableCollection<Search>
+            
+            searchesGroups = new SearchGroup("Recent Searches")
             {
                 new Search(0, "Santa Monica, CA, United States",
                                 new DateTime(2021,10,1), new DateTime(2021,10,10)),
-                new Search(0, "Santa Monica, CA, United States 2",
-                                new DateTime(2021,10,1), new DateTime(2021,10,10))
-
+                new Search(1, "West Hollywood, CA, United States",
+                                new DateTime(2021,10,1), new DateTime(2021,10,10)),
+               
             };
-            searchesGroups = new SearchGroup("SearchGroup", searches);
+
+            
         }
-        IEnumerable<Search> GetSearches(string filter=null)
+        public IEnumerable<Search> GetSearches(string filter=null)
         {
             if (String.IsNullOrWhiteSpace(filter))
-                return searches;
-            return searches.Where(c => c.Location.StartsWith(filter));
+                return searchesGroups;
+            return searchesGroups.Where(c => c.Location.StartsWith(filter));
         }
-        void DeleteSearch(int searchId)
+        public void DeleteSearch(int searchId)
         {
-            searches.Remove(searches.Where(c => c.Id == searchId).First());
+            searchesGroups.Remove(searchesGroups.Where(c => c.Id == searchId).First());
         }
     }
 }

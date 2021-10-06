@@ -12,6 +12,12 @@ namespace Airbnb
         DateTime CheckIn { get; }
         DateTime CheckOut { get; }
 
+        public string CheckInAndOutString {
+            get
+            {
+                return $"{CheckIn.ToString("MMM d, yyyy")} - {CheckOut.ToString("MMM d, yyyy")}";
+            }
+        }
         public Search(int id , string location, DateTime checkIn, DateTime checkOut)
         {
             Id = id;

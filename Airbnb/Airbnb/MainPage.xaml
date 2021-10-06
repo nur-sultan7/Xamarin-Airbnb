@@ -10,15 +10,9 @@
         GroupDisplayBinding="{Binding Title}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
-                        <StackLayout>
-                            <Label Text="{Binding Location}"/>
-                            <StackLayout Orientation="Horizontal">
-                                <Label Text="{Binding CheckIn}"/>
-                                <Label Text="{Binding CheckOut}"/>
-                            </StackLayout>
-                        </StackLayout>
-                    </ViewCell>
+                    <TextCell
+                        Text="{Binding Location}"
+                        Detail="{Binding CheckInAndOutString}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         
