@@ -38,5 +38,11 @@ namespace Airbnb
             service.DeleteSearch(searchObject.Id);
             searchGroup[0].Remove(searchObject);
         }
+
+        private void listview_Refreshing(object sender, EventArgs e)
+        {
+            SetSearchGroup(searcher.Text);
+            listview.EndRefresh();
+        }
     }
 }
