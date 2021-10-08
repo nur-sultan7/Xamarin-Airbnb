@@ -12,7 +12,11 @@
                 <DataTemplate>
                     <TextCell
                         Text="{Binding Location}"
-                        Detail="{Binding CheckInAndOutString}"/>
+                        Detail="{Binding CheckInAndOutString}">
+                        <TextCell.ContextActions>
+                            <MenuItem x:Name="Delete" Text="Delete" IsDestructive="True" Clicked="Delete_Clicked" CommandParameter="{Binding .}"/>
+                        </TextCell.ContextActions>
+                    </TextCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

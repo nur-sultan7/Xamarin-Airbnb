@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,20 +14,29 @@ namespace Airbnb
     public partial class SearchListExercise : ContentPage
     {
         private SearchService service;
+        private List<SearchGroup> searchGroup;
+        
         public SearchListExercise()
         {
             InitializeComponent();
             service = new SearchService();
-
-            listview.ItemsSource = GetSearchGroup();
+            SetSearchGroup();
         }
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
-            listview.ItemsSource = GetSearchGroup(e.NewTextValue);
+            SetSearchGroup(e.NewTextValue);
         }
-        private List<SearchGroup> GetSearchGroup(string searchStr = null)
+        private void SetSearchGroup(string searchStr = null)
         {
-            return new List<SearchGroup> { new SearchGroup("Recent searches", service.GetSearches(searchStr)) };
+            searchGroup = new List<SearchGroup> { new SearchGroup("Recent searches", service.GetSearches(searchStr)) };
+            listview.ItemsSource = searchGroup;
+        }
+
+        private void Delete_Clicked(object sender, EventArgs e)
+        {
+            var searchObject =(Search) ((MenuItem)sender).CommandParameter;
+            service.DeleteSearch(searchObject.Id);
+            searchGroup[0].Remove(searchObject);
         }
     }
 }
