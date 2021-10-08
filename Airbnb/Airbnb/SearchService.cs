@@ -28,7 +28,7 @@ namespace Airbnb
         }
         public void DeleteSearch(int searchId)
         {
-            searches.Remove(searches.Where(c => c.Id == searchId).First());
+            searches.Remove(searches.First(c => c.Id == searchId));
         }
     }
 }
