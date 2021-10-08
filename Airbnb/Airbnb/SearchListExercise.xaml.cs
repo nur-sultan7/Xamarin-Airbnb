@@ -44,5 +44,16 @@ namespace Airbnb
             SetSearchGroup(searcher.Text);
             listview.EndRefresh();
         }
+
+        private void listview_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+
+        }
+
+        private void listview_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var searchObject = e.SelectedItem as Search;
+            DisplayAlert("Selected", searchObject.Location, "Ok");
+        }
     }
 }
