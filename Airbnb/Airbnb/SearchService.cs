@@ -8,12 +8,13 @@ namespace Airbnb
 {
     class SearchService
     {
-        public SearchGroup searchesGroups { get; }
-        
+
+
+        private List<Search> searches;
         public SearchService()
         {
             
-            searchesGroups = new SearchGroup("Recent Searches")
+            searches = new List<Search>()
             {
                 new Search(0, "Santa Monica, CA, United States",
                                 new DateTime(2021,10,1), new DateTime(2021,10,10)),
@@ -24,15 +25,16 @@ namespace Airbnb
 
             
         }
-        public IEnumerable<Search> GetSearches(string filter=null)
+        public IEnumerable<Search> GetSearches(string filter = null)
         {
             if (String.IsNullOrWhiteSpace(filter))
-                return searchesGroups;
-            return searchesGroups.Where(c => c.Location.StartsWith(filter));
+                return searches;
+
+            return searches.Where(c => c.Location.StartsWith(filter));
         }
         public void DeleteSearch(int searchId)
         {
-            searchesGroups.Remove(searchesGroups.Where(c => c.Id == searchId).First());
+            searches.Remove(searches.Where(c => c.Id == searchId).First());
         }
     }
 }
